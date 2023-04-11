@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <style>
+
+
+:root {
+  --color-light: white;
+  --color-dark: #212121;
+  --color-signal: #fab700;
+  
+  --color-background: var(--color-light);
+  --color-text: var(--color-dark);
+  --color-accent: var(--color-signal);
+  
+  --size-bezel: .5rem;
+  --size-radius: 6px;
+  
+  line-height: 1.4;
+  
+  font-family: 'Inter', sans-serif;
+  font-size: calc(.6rem + .4vw);
+  color: var(--color-text);
+  background: var(--color-background);
+  font-weight: 300;
+  padding: 0 calc(var(--size-bezel) * 3);
+}
+
+textarea {
+width: 100%;
+height: 6rem;
+}
+
+h1, h2, h3 {
+  font-weight: 900;
+}
+
+p {
+    padding: 2rem;
+    font-style: italic;
+}
+
+mark {
+  background: var(--color-accent);
+  color: var(--color-text);
+  font-weight: bold;
+  padding: 0 0.2em;
+}
+
+.card {
+  background: var(--color-background);
+  padding: calc(4 * var(--size-bezel));
+  margin-top: calc(4 * var(--size-bezel));
+  border-radius: var(--size-radius);
+  border: 3px solid var(--color-shadow, currentColor);
+  box-shadow: .5rem .5rem 0 var(--color-shadow, currentColor);
+  
+  &--inverted {
+    --color-background: var(--color-dark);
+    color: var(--color-light);
+    --color-shadow: var(--color-accent);
+  }
+  
+  &--accent {
+    --color-background: var(--color-signal);
+    --color-accent: var(--color-light);
+    color: var(--color-dark);
+  }
+  
+  *:first-child {
+    margin-top: 0;
+  }
+}
+
+
+.l-design-widht {
+  max-width: 40rem;
+  padding: 1rem;
+}
+
+.input {
+  position: relative;
+  
+  &__label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * .5);
+    margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * .5);
+    background: pink;
+    white-space: nowrap;
+    transform: translate(0, 0);
+    transform-origin: 0 0;
+    background: var(--color-background);
+    transition: transform 120ms ease-in;
+    font-weight: bold;
+    line-height: 1.2;
+  }
+  &__field {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border: 3px solid currentColor;
+    padding: calc(var(--size-bezel) * 1.5) var(--size-bezel);
+    color: currentColor;
+    background: transparent;
+    border-radius: var(--size-radius);
+    
+    &:focus,
+    &:not(:placeholder-shown) {
+      & + .input__label {
+        transform: translate(.25rem, -65%) scale(.8);
+        color: var(--color-accent);
+      }
+    }
+  }
+}
+
+
+.button-group {
+  margin-top: calc(var(--size-bezel) * 2.5);
+}
+
+button {
+  color: currentColor;
+  padding: var(--size-bezel) calc(var(--size-bezel) * 2);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--size-radius);
+  font-weight: 900;
+  
+  &[type=reset]{
+    background: var(--color-background);
+    font-weight: 200;
+  } 
+}
+
+button + button {
+  margin-left: calc(var(--size-bezel) * 2);
+}
+
+.icon {
+  display: inline-block;
+  width: 1em; height: 1em;
+  margin-right: .5em;
+}
+
+.hidden {
+  display: none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="jumbotron text-center">
+        <h1>Prompt OpenAI about MRV</h1>
+      </div>
+      
+      <article class="l-design-widht">
+        <h1>Ask GPT3 about the spreadsheet</h1>
+      
+        <form action = "/prompt" method = "post">
+        
+        <div class="card card--inverted">
+            <h2> <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-coffee" href="#icon-coffee" />
+            </svg>Prompt</h2>
+            
+            <textarea placeholder="Start typing... &#10&#10 " type="text" name="text"></textarea>
+            </textarea>
+            <span>e.g. &#10'Below is the python pandas code for getting median average emissions:'</span>
+            
+            <div class="button-group">
+                <button type="submit">Send</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+        {% if response %}
+            <h2> <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-coffee" href="#icon-coffee" />
+            </svg>Result</h2>
+            <p>{{response}}</p>
+        {% endif %}
+        </div>
+        </div>
+        
+      </article>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+        <symbol id="icon-coffee" viewBox="0 0 20 20">
+          <title>icon-coffee</title>
+          <path fill="currentColor" d="M15,17H14V9h3a3,3,0,0,1,3,3h0A5,5,0,0,1,15,17Zm1-6v3.83A3,3,0,0,0,18,12a1,1,0,0,0-1-1Z"/>
+          <rect fill="currentColor" x="1" y="7" width="15" height="12" rx="3" ry="3"/>
+          <path fill="var(--color-accent)" d="M7.07,5.42a5.45,5.45,0,0,1,0-4.85,1,1,0,0,1,1.79.89,3.44,3.44,0,0,0,0,3.06,1,1,0,0,1-1.79.89Z"/>
+          <path fill="var(--color-accent)" d="M3.07,5.42a5.45,5.45,0,0,1,0-4.85,1,1,0,0,1,1.79.89,3.44,3.44,0,0,0,0,3.06,1,1,0,1,1-1.79.89Z"/>
+          <path fill="var(--color-accent)" d="M11.07,5.42a5.45,5.45,0,0,1,0-4.85,1,1,0,0,1,1.79.89,3.44,3.44,0,0,0,0,3.06,1,1,0,1,1-1.79.89Z"/>
+        </symbol>
+      </svg>
+      <script>
+          let timer;
+
+document.addEventListener('input', e => {
+  const el = e.target;
+  
+  if( el.matches('[data-color]') ) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      document.documentElement.style.setProperty(`--color-${el.dataset.color}`, el.value);
+    }, 100)
+  }
+})
+
+
+var myTextArea = document.getElementsByTagName('textarea')[0];
+var myTextLength = myTextArea.value.length
+var myTextWidth = parseInt(window.getComputedStyle(myTextArea).width);
+var myTextMinLength = 20;
+var myTextMaxWidth = ((parseInt(window.getComputedStyle(document.body).width) / 100) * 80);
+
+function checkTextLength() {
+    myTextLength = myTextArea.value.length;
+    
+    if ((myTextLength > myTextMinLength) && (myTextWidth < (myTextMaxWidth))) {
+            myTextWidth += 8;
+        }
+    
+    myTextArea.style.width = myTextWidth + 'px';
+}
+
+myTextArea.addEventListener('keypress', checkTextLength, false);
+      </script>
+</body>
+</html>

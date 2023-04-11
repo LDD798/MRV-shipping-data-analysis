@@ -1,0 +1,6 @@
+.env
+*.xlsx
+carbon-chain-venv/*
+node_express_api/node_modules/*
+.vscode
+__pycache__
