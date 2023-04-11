@@ -1,6 +1,6 @@
 # MRV Shipping data analysis
 
-![alt text](https://www.carbonchain.com/hubfs/shutterstock_1896236902.jpg)
+![Ship](./demo_screenshots/ship.webp)
 
 This repo contains 2 pieces of work.
 1. Jupyter Notebooks answering some data analysis questions.
@@ -36,3 +36,22 @@ Run the app with nodemon
 `npm run dev`
 
 Go to http://localhost:3000/
+
+
+## Example screenshots
+
+
+![web_page](demo_screenshots/demo_gpt3_pandas_query.png)
+
+
+![chart](demo_screenshots/demo_data_analysis.png)
+
+
+![chart_1](demo_screenshots/demo_data_analysis_1.png)
+
+
+![chart_2](demo_screenshots/demo_data_analysis_2.png)
+
+
+![chart_3](demo_screenshots/demo_data_analysis_3.png)
+
